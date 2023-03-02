@@ -1,8 +1,8 @@
-import { Entity, PrimaryColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column } from "typeorm";
 
 @Entity("addresses")
 class Address {
-  @PrimaryColumn("increment")
+  @PrimaryColumn()
   id: number;
 
   @Column({ length: 45 })

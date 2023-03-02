@@ -4,7 +4,7 @@ import User from "./user.entities";
 
 @Entity("schedules_users_properties")
 class Schedules {
-  @PrimaryColumn("increment")
+  @PrimaryColumn()
   id: number;
 
   @Column({ type: "date" })

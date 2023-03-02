@@ -9,7 +9,7 @@ import {
 
 @Entity("users")
 class User {
-  @PrimaryColumn("increment")
+  @PrimaryColumn()
   id: number;
 
   @Column({ length: 45 })

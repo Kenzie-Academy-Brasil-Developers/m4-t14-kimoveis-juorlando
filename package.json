@@ -27,6 +27,7 @@
     "sqlite3": "^5.1.4",
     "supertest": "^6.3.3",
     "ts-jest": "^28.0.8",
+    "tsconfig-paths": "^3.14.2",
     "typescript": "^4.9.5"
   },
   "name": "m4-t14-kimoveis-juorlando",

@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   OneToOne,
   JoinColumn,
-  OneToMany,
   ManyToOne,
 } from "typeorm";
 import Address from "./addresses.entities";
@@ -14,7 +13,7 @@ import Category from "./categories.entities";
 
 @Entity("real_estate")
 class RealEstate {
-  @PrimaryColumn("increment")
+  @PrimaryColumn()
   id: number;
 
   @Column({ default: false })
