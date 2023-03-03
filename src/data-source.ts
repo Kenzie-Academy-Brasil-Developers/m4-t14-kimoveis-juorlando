@@ -2,7 +2,7 @@ import "dotenv/config";
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
-import { appError } from "./errors";
+import { AppError } from "./errors";
 import { User, Address, Category, RealEstate, Schedules } from "./entities";
 
 const dataSourceConfig = (): DataSourceOptions => {
@@ -14,7 +14,7 @@ const dataSourceConfig = (): DataSourceOptions => {
   const nodeEnv: string | undefined = process.env.NODE_ENV;
 
   if (!baseUrl) {
-    throw new appError("Env var DATABASE_URL does not exists");
+    throw new AppError("Env var DATABASE_URL does not exists");
   }
 
   if (nodeEnv === "test") {

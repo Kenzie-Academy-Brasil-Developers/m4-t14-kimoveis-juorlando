@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -13,7 +13,7 @@ import Category from "./categories.entities";
 
 @Entity("real_estate")
 class RealEstate {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("increment")
   id: number;
 
   @Column({ default: false })
@@ -25,11 +25,11 @@ class RealEstate {
   @Column({ type: "integer" })
   size: number;
 
-  @CreateDateColumn()
-  createAt: string;
+  @CreateDateColumn({type: "date"})
+  createAt: Date | string;
 
-  @UpdateDateColumn()
-  updateAt: string;
+  @UpdateDateColumn({type: "date"})
+  updateAt: Date | string;
 
   @OneToOne(() => Address)
   @JoinColumn()

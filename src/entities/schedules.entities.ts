@@ -1,10 +1,10 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import RealEstate from "./realEstate.entities";
 import User from "./user.entities";
 
 @Entity("schedules_users_properties")
 class Schedules {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("increment")
   id: number;
 
   @Column({ type: "date" })

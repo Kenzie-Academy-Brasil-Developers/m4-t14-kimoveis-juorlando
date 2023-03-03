@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -9,7 +9,7 @@ import {
 
 @Entity("users")
 class User {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column({ length: 45 })
@@ -24,14 +24,14 @@ class User {
   @Column({ length: 120 })
   password: string;
 
-  @CreateDateColumn()
-  createAt: string;
+  @CreateDateColumn({type: "date"})
+  createAt: Date | string;
 
-  @UpdateDateColumn()
-  updateAt: string;
+  @UpdateDateColumn({type: "date"})
+  updateAt: Date | string;
 
-  @DeleteDateColumn()
-  deleteAt: string;
+  @DeleteDateColumn({type: "date"})
+  deleteAt: Date | string | null;
 }
 
 export default User;
