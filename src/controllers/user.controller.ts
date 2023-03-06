@@ -5,6 +5,7 @@ import {
   iUserUpdate,
 } from "../interfaces/user.interfaces";
 import { createUserService } from "../services/user/userCreate.service";
+import { deleteUserService } from "../services/user/userDelete.service";
 import { retrieveUserService } from "../services/user/userRetrieve.service";
 import { updateUserService } from "../services/user/userUpdate.service";
 
@@ -37,4 +38,17 @@ const updateUserController = async (request: Request, response: Response) => {
   response.status(201).json(newData);
 };
 
-export { createUserController, retrieveUserController, updateUserController };
+const deleteUserController = async (request: Request, response: Response) => {
+  const userId: number = parseInt(request.params.id);
+
+  await deleteUserService(userId);
+
+  response.status(204).send();
+};
+
+export {
+  createUserController,
+  retrieveUserController,
+  updateUserController,
+  deleteUserController,
+};
