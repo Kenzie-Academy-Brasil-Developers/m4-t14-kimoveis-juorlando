@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express"
 import { AppError } from "../errors";
 
 const ensureIsAdmin = async (
