@@ -1,11 +1,23 @@
 import { Router } from "express";
-import { createUserController } from "../controllers/user.controller";
+import {
+  createUserController,
+  retrieveUserController,
+} from "../controllers/user.controller";
 import ensureDataIsValidMiddleware from "../middleware/ensureDataIsValid.middleware";
-import { ensureEmailNotExists } from "../middleware/ensureEmail.middleware";
+import ensureEmailNotExists from "../middleware/ensureEmail.middleware";
+import ensureIsAdmin from "../middleware/ensureIsAdmin.middleware";
+import ensureValidToken from "../middleware/ensureTokenIsValid.middleware";
 import { createUserSchema } from "../schemas/userSchema";
 
-const userRoutes: Router = Router()
+const userRoutes: Router = Router();
 
-userRoutes.post("", ensureDataIsValidMiddleware(createUserSchema), ensureEmailNotExists, createUserController)
+userRoutes.post(
+  "",
+  ensureDataIsValidMiddleware(createUserSchema),
+  ensureEmailNotExists,
+  createUserController
+);
 
-export default userRoutes
+userRoutes.get("", ensureValidToken, ensureIsAdmin, retrieveUserController);
+
+export default userRoutes;

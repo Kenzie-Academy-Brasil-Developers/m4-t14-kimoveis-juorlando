@@ -22,4 +22,4 @@ const ensureEmailNotExists = async (
   return next();
 };
 
-export { ensureEmailNotExists };
+export default ensureEmailNotExists;
