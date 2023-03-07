@@ -19,8 +19,8 @@ class RealEstate {
   @Column({ default: false })
   sold: boolean;
 
-  @Column({ type: "decimal", precision: 12, scale: 2 })
-  value: number;
+  @Column({ type: 'decimal', precision: 12, scale: 2, default: 0 })
+  value: number | string;
 
   @Column({ type: "integer" })
   size: number;
@@ -31,16 +31,13 @@ class RealEstate {
   @UpdateDateColumn({type: "date"})
   updatedAt: string;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, {eager: true})
   @JoinColumn()
   address: Address;
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, {eager: true})
   @JoinColumn()
   category: Category;
-
-  @Column({ type: "integer", nullable: true })
-  categoryId: number;
 }
 
 export default RealEstate;

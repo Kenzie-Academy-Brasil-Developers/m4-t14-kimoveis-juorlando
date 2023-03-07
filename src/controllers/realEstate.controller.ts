@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
-import { iRealEstate } from "../interfaces/realEstate.interface";
-import createAddressService from "../services/address/createAddress.service";
+import {
+  iRealEstate,
+  iRealEstateReturn,
+  iRealEstateReturns,
+} from "../interfaces/realEstate.interface";
 import createRealEstateService from "../services/realEstate/createRealEstate.service";
+import retrieveRealEstateService from "../services/realEstate/retrieveRealEstate.service";
 
 const createRealEstateController = async (
   request: Request,
@@ -14,16 +18,13 @@ const createRealEstateController = async (
   return response.status(201).json(newEstate);
 };
 
-const createAddressController = async (
-  request: Request,
-  response: Response
-): Promise<Response> => {
-  const addressData = request.body;
-  const estateId: number = request.validatedAdmin.id;
+const retrieveRealEstateController = async (request: Request, response: Response) => {
+  const getRealEstate: iRealEstateReturns = await retrieveRealEstateService();
 
-  const newAddress = await createAddressService(estateId, addressData);
-
-  return response.status(201).json(newAddress);
+  return response.status(201).json(getRealEstate);
 };
 
-export {createRealEstateController, createAddressController};
+export {
+  createRealEstateController,
+  retrieveRealEstateController,
+};

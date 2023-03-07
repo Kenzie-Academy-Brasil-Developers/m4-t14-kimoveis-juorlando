@@ -23,11 +23,10 @@ const handleErrors = (
   }
 
   if (err instanceof ZodError) {
+    console.log(err);
     return response.status(400).json(err.flatten().fieldErrors);
   }
-
   console.log(err);
-
   return response.status(500).json({
     message: "Internal server error",
   });
