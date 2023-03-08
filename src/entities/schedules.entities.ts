@@ -10,7 +10,7 @@ class Schedules {
   @Column({ type: "date" })
   date: string;
 
-  @Column({ type: "timestamp" })
+  @Column({ type: "time" })
   hour: string;
 
   @ManyToOne(() => RealEstate)

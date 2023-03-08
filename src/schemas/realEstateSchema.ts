@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { nullable, z } from "zod";
 
 const createAddressSchema = z.object({
   street: z.string(),
@@ -11,8 +11,8 @@ const createAddressSchema = z.object({
 const createRealEstateSchema = z.object({
   value: z.number().or(z.string()),
   size: z.number().int(),
-  address: createAddressSchema,
   categoryId: z.number(),
+  address: createAddressSchema,
 });
 
 const AddressReturn = createAddressSchema

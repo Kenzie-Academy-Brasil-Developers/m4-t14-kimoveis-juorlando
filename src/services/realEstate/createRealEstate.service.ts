@@ -3,6 +3,7 @@ import AppDataSource from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
 import {
+  iAddress,
   iRealEstate,
   iRealEstateReturn,
 } from "../../interfaces/realEstate.interface";
@@ -11,7 +12,7 @@ import { realEstateReturn } from "../../schemas/realEstateSchema";
 const createRealEstateService = async (
   estateData: iRealEstate
 ): Promise<iRealEstateReturn> => {
-  const addressData = estateData.address;
+  const addressData: iAddress = estateData.address;
 
   const addressRepository: Repository<Address> =
     AppDataSource.getRepository(Address);
@@ -27,7 +28,8 @@ const createRealEstateService = async (
     throw new AppError("Category not found");
   }
 
-  addressRepository.create(addressData);
+  await addressRepository.create(addressData);
+
   const newAddress = await addressRepository.save(addressData);
 
   const estateRepository: Repository<RealEstate> =

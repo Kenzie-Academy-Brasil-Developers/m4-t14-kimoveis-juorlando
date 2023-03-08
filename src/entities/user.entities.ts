@@ -14,16 +14,16 @@ class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ length: 45 })
+  @Column({ type: "varchar", length: 45 })
   name: string;
 
-  @Column({ length: 45, unique: true })
+  @Column({ type: "varchar", length: 45, unique: true })
   email: string;
 
   @Column({ type: "boolean", default: false})
   admin: boolean;
 
-  @Column({ length: 120 })
+  @Column({ type: "varchar", length: 120 })
   password: string;
 
   @CreateDateColumn({type: "date"})
