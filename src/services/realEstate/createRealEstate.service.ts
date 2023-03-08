@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import AppDataSource from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
+import { AppError } from "../../errors";
 import {
   iRealEstate,
   iRealEstateReturn,
@@ -10,22 +11,24 @@ import { realEstateReturn } from "../../schemas/realEstateSchema";
 const createRealEstateService = async (
   estateData: iRealEstate
 ): Promise<iRealEstateReturn> => {
-
-  const addressData = estateData.address
+  const addressData = estateData.address;
 
   const addressRepository: Repository<Address> =
     AppDataSource.getRepository(Address);
 
-  const categoryRepository: Repository<Category> = AppDataSource.getRepository(Category)
+  const categoryRepository: Repository<Category> =
+    AppDataSource.getRepository(Category);
 
   const newCategory = await categoryRepository.findOneBy({
-    id: estateData.categoryId
-  })
+    id: estateData.categoryId,
+  });
 
-  
+  if (!newCategory) {
+    throw new AppError("Category not found");
+  }
 
-     addressRepository.create(addressData);
-     const newAddress = await addressRepository.save(addressData);
+  addressRepository.create(addressData);
+  const newAddress = await addressRepository.save(addressData);
 
   const estateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
@@ -33,7 +36,7 @@ const createRealEstateService = async (
   const realEstate = estateRepository.create({
     ...estateData,
     address: newAddress!,
-    category: newCategory!
+    category: newCategory!,
   });
 
   await estateRepository.save(realEstate);

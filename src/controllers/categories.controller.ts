@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
-import { iCategory, iCategoryReturns } from "../interfaces/categories.interface";
+import {
+  iCategory,
+  iCategoryReturns,
+} from "../interfaces/categories.interface";
 import { retrieveCategoryService } from "../services/categories/categoryRetrieve.service";
+import categoryRetrieveRealEstateService from "../services/categories/categoryRetrieveRealEstate.service";
 import { createCategoryService } from "../services/categories/createCategory.service";
 
 const createCategoryController = async (
@@ -23,4 +27,19 @@ const retrieveCategoryController = async (
   return response.status(201).json(getCategory);
 };
 
-export { createCategoryController, retrieveCategoryController };
+const categoryRetrieveRealEstateController = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const categoryId: number = parseInt(request.params.id);
+
+  const categoryEstate = await categoryRetrieveRealEstateService(categoryId);
+
+  return response.status(201).json(categoryEstate);
+};
+
+export {
+  createCategoryController,
+  retrieveCategoryController,
+  categoryRetrieveRealEstateController,
+};
