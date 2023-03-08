@@ -7,8 +7,10 @@ const createSchedulesController = async (
   response: Response
 ): Promise<Response> => {
   const scheduleData: iShedules = request.body;
+  const userId = request.validatedAdmin.id
+  const estateId = request.body.realEstateId
 
-  const newSchedule = await createSchedulesService(scheduleData);
+  const newSchedule = await createSchedulesService(scheduleData, userId, estateId);
 
   return response.status(201).json(newSchedule);
 };

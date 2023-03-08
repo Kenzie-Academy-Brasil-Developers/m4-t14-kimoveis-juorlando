@@ -12,6 +12,7 @@ import { realEstateReturn } from "../../schemas/realEstateSchema";
 const createRealEstateService = async (
   estateData: iRealEstate
 ): Promise<iRealEstateReturn> => {
+  
   const addressData: iAddress = estateData.address;
 
   const addressRepository: Repository<Address> =
@@ -28,7 +29,7 @@ const createRealEstateService = async (
     throw new AppError("Category not found");
   }
 
-  await addressRepository.create(addressData);
+  addressRepository.create(addressData);
 
   const newAddress = await addressRepository.save(addressData);
 
