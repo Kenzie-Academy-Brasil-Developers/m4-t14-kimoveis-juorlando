@@ -4,9 +4,7 @@ import { RealEstate, Schedules, User } from "../../entities";
 import { AppError } from "../../errors";
 import {
   iShedules,
-  iShedulesReturn,
 } from "../../interfaces/schedules.interface";
-import { schedulesSchemaReturn } from "../../schemas/schedulesSchema";
 
 const createSchedulesService = async (
   scheduleData: iShedules,
@@ -27,7 +25,6 @@ const createSchedulesService = async (
   if(formatedDay === 6 || formatedDay === 0){
     throw new AppError("Invalid day: Only workdays are markable")
   }
-
 
   const checkUser = await schedulesRepository
   .createQueryBuilder("schedules_users_properties")
