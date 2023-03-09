@@ -15,6 +15,20 @@ const createSchedulesService = async (
 
   const schedulesRepository: Repository<Schedules> = AppDataSource.getRepository(Schedules);
 
+  const getDate = `${scheduleData.date}, ${scheduleData.hour}`
+  const parseDate = new Date(getDate)
+  const formatedHour = parseDate.getHours()
+  const formatedDay = parseDate.getDay()
+
+  if(formatedHour > 18 || formatedHour < 8){
+    throw new AppError("Invalid hour: only hours between 8:00 am and 18:00 pm")
+  }
+
+  if(formatedDay === 6 || formatedDay === 0){
+    throw new AppError("Invalid day: Only workdays are markable")
+  }
+
+
   const checkUser = await schedulesRepository
   .createQueryBuilder("schedules_users_properties")
   .leftJoinAndSelect("schedules_users_properties.user", "users")
