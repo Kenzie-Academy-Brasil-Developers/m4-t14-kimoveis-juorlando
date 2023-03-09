@@ -11,6 +11,8 @@ const ensureEmail = async (
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
+  const adminAuth = request.validatedAdmin;
+
   const findEmail = await userRepository.findOneBy({
     name: request.body.email,
   });

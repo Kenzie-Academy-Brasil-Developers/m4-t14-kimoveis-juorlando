@@ -1,29 +1,16 @@
 import { z } from "zod";
-import { hashSync } from "bcryptjs";
 
 const createUserSchema = z.object({
   name: z.string().min(3).max(45),
   email: z.string().min(10).max(45),
   admin: z.boolean().optional().default(false),
-  password: z
-    .string()
-    .min(4)
-    .max(120)
-    .transform((pass) => {
-      return hashSync(pass, 10);
-    }),
+  password: z.string().min(4).max(120),
 });
 
 const updateSchema = z.object({
   name: z.string().min(3).max(45).optional(),
   email: z.string().min(10).max(45).optional(),
-  password: z
-    .string()
-    .min(4)
-    .max(120)
-    .transform(async (pass: any) => {
-      return await hashSync(pass, 10);
-    }).optional(),
+  password: z.string().min(4).max(120).optional(),
 });
 
 const returnUserUpdateSchema = updateSchema
@@ -36,7 +23,15 @@ const returnUserUpdateSchema = updateSchema
   })
   .omit({ password: true });
 
-const returnUserSchema = createUserSchema
+const returnUserSchema = createUserSchema.extend({
+  id: z.number(),
+  admin: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  deletedAt: z.string().nullable(),
+});
+
+const returnUserSchemaWhitoutPassword = createUserSchema
   .extend({
     id: z.number(),
     admin: z.boolean(),
@@ -46,7 +41,7 @@ const returnUserSchema = createUserSchema
   })
   .omit({ password: true });
 
-const returnUserSchemaAll = returnUserSchema.array();
+const returnUserSchemaAll = returnUserSchemaWhitoutPassword.array();
 
 export {
   createUserSchema,
@@ -54,4 +49,5 @@ export {
   returnUserSchemaAll,
   updateSchema,
   returnUserUpdateSchema,
+  returnUserSchemaWhitoutPassword,
 };

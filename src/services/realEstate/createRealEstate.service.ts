@@ -11,7 +11,7 @@ import { realEstateReturn } from "../../schemas/realEstateSchema";
 
 const createRealEstateService = async (
   estateData: iRealEstate
-): Promise<iRealEstateReturn> => {
+): Promise<RealEstate> => {
   
   const addressData: iAddress = estateData.address;
 
@@ -44,9 +44,7 @@ const createRealEstateService = async (
 
   await estateRepository.save(realEstate);
 
-  const newRealEstate = realEstateReturn.parse(realEstate);
-
-  return newRealEstate;
+  return realEstate;
 };
 
 export default createRealEstateService;

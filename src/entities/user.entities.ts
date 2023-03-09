@@ -1,3 +1,4 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,6 +7,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from "typeorm";
 import Schedules from "./schedules.entities";
 
@@ -37,6 +40,15 @@ class User {
 
   @OneToMany(() => Schedules, (schedules) => schedules.user)
   schedules: Schedules[]
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword(){
+      const isEncrypted = getRounds(this.password)
+      if(!isEncrypted){
+          this.password = hashSync(this.password, 10)
+      }
+  }
 }
 
 export default User;

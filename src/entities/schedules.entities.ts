@@ -13,11 +13,11 @@ class Schedules {
   @Column({ type: "time" })
   hour: string;
 
-  @ManyToOne(() => RealEstate, {eager: true})
+  @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
   @JoinColumn()
   realEstate: RealEstate;
 
-  @ManyToOne(() => User, {eager: true})
+  @ManyToOne(() => User, (user) => user.schedules)
   @JoinColumn()
   user: User;
 }
