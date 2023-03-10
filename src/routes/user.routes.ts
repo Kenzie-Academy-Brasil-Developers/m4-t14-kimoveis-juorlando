@@ -28,9 +28,10 @@ userRoutes.get("", ensureValidToken, ensureIsAdmin, retrieveUserController);
 
 userRoutes.patch(
   "/:id",
-  ensureValidToken,
   ensureDataIsValidMiddleware(updateSchema),
+  ensureValidToken,
   ensureUserExistsMiddleware,
+  userNotAdmin,
   ensureRightUser,
   ensureEmail,
   updateUserController
