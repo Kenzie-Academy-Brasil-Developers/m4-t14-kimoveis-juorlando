@@ -26,15 +26,6 @@ const createLoginService = async (
     throw new AppError("Invalid credentials", 401);
   }
 
-  const inativeUsers = await userRepository.findOne({
-    withDeleted: true,
-  });
-
-  if(inativeUsers){
-    throw new AppError("Invalid credentials", 401);
-  }
-
-
   const token = jwt.sign(
     {
       name: user.name.toString(),

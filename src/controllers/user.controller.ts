@@ -17,7 +17,7 @@ const createUserController = async (
 
   const newUser = await createUserService(userData);
 
-  return response.status(200).json(newUser);
+  return response.status(201).json(newUser);
 };
 
 const retrieveUserController = async (
@@ -26,7 +26,7 @@ const retrieveUserController = async (
 ): Promise<Response> => {
   const getUser: iUsersReturn = await retrieveUserService();
 
-  return response.status(201).json(getUser);
+  return response.status(200).json(getUser);
 };
 
 const updateUserController = async (request: Request, response: Response) => {

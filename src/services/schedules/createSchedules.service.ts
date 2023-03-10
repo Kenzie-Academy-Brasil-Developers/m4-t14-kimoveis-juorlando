@@ -37,7 +37,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (checkUser) {
-    throw new AppError("User schedule to this real estate at this date and time already exists");
+    throw new AppError("User schedule to this real estate at this date and time already exists", 409);
   }
 
   const checkEstate = await schedulesRepository
@@ -53,7 +53,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (checkEstate) {
-    throw new AppError("Schedule to this real estate at this date and time already exists");
+    throw new AppError("Schedule to this real estate at this date and time already exists", 409);
   }
 
   const estateRepository: Repository<RealEstate> =
@@ -64,7 +64,7 @@ const createSchedulesService = async (
   });
 
   if (!newEstate) {
-    throw new AppError("RealEstate not found");
+    throw new AppError("RealEstate not found", 404);
   }
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);

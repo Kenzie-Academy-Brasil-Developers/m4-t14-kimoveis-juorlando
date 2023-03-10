@@ -23,7 +23,7 @@ const retrieveSchedulesController = async (
 
   const listDate = await retrieveSchedulesService(estateId);
 
-  return response.status(201).json(listDate);
+  return response.status(200).json(listDate);
 };
 
 export { createSchedulesController, retrieveSchedulesController };

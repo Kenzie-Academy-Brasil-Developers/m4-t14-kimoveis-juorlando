@@ -8,16 +8,16 @@ const retrieveRealEstateService = async (): Promise<iRealEstateReturns> => {
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
 
-  const findEstate: iRealEstateReturns = await realEstateRepository.find({
+  const findEstate = await realEstateRepository.find({
     relations: {
       address: true,
       category: true,
     },
   });
 
-  const realEstate = realEstateArray.parse(findEstate);
+  const listEstates = realEstateArray.parse(findEstate)
 
-  return realEstate;
+  return listEstates;
 };
 
 export default retrieveRealEstateService;

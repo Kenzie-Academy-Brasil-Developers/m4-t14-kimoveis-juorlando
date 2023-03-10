@@ -9,7 +9,7 @@ const ensureIsAdmin = async (
   const adminAuth = request.validatedAdmin;
 
   if (adminAuth.admin.toString() !== "true") {
-    throw new AppError("Insufficient permission");
+    throw new AppError("Insufficient permission", 403);
   }
 
   return next();

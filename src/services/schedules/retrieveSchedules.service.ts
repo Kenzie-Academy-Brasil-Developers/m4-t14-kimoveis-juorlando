@@ -16,7 +16,7 @@ const retrieveSchedulesService = async (estateId: number) => {
     .getOne();
 
   if (!listSchedules) {
-    throw new AppError("Estate not found", 404);
+    throw new AppError("RealEstate not found", 404);
   }
 
   return listSchedules;

@@ -5,13 +5,17 @@ import {
 } from "../controllers/realEstate.controller";
 import ensureAddress from "../middleware/ensureAddressNotExists.middleware";
 import ensureDataIsValidMiddleware from "../middleware/ensureDataIsValid.middleware";
-import { createRealEstateSchema } from "../schemas/realEstateSchema";
+import ensureRightUser from "../middleware/ensureRigthUser,middleware";
+import ensureValidToken from "../middleware/ensureTokenIsValid.middleware";
+import userNotAdmin from "../middleware/userNotAdmin.middleware";
+import { createRealEstateSchemaPost } from "../schemas/realEstateSchema";
 
 const realEstateRoutes: Router = Router();
 
 realEstateRoutes.post(
   "",
-  ensureDataIsValidMiddleware(createRealEstateSchema),
+  ensureValidToken,
+  ensureDataIsValidMiddleware(createRealEstateSchemaPost),
   ensureAddress,
   createRealEstateController
 );

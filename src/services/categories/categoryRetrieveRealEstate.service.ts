@@ -1,22 +1,14 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Category, RealEstate } from "../../entities";
-import {
-  iCategoryRealEstateReturn,
-  iCategoryRealEstateReturns,
-} from "../../interfaces/categories.interface";
-import {
-  categoryRealEstateReturn,
-  categoryRealEstateSchema,
-} from "../../schemas/categoriesSchema";
 
 const categoryRetrieveRealEstateService = async (
   categoryId: number
-): Promise<iCategoryRealEstateReturns> => {
+) => {
   const categoryRepository: Repository<Category> =
     AppDataSource.getRepository(Category);
 
-  const listCategories: Array<Category> = await categoryRepository.find({
+  const listCategories = await categoryRepository.findOne({
     where: {
       id: categoryId,
     },
@@ -25,9 +17,7 @@ const categoryRetrieveRealEstateService = async (
     },
   });
 
-  const returnCategories = categoryRealEstateReturn.parse(listCategories!);
-
-  return returnCategories;
+  return listCategories;
 };
 
 export default categoryRetrieveRealEstateService;

@@ -12,6 +12,7 @@ import ensureIsAdmin from "../middleware/ensureIsAdmin.middleware";
 import ensureRightUser from "../middleware/ensureRigthUser,middleware";
 import ensureValidToken from "../middleware/ensureTokenIsValid.middleware";
 import ensureUserExistsMiddleware from "../middleware/ensureUserExisits.middleware";
+import userNotAdmin from "../middleware/userNotAdmin.middleware";
 import { createUserSchema, updateSchema } from "../schemas/userSchema";
 
 const userRoutes: Router = Router();
@@ -37,9 +38,9 @@ userRoutes.patch(
 
 userRoutes.delete(
   "/:id",
-  ensureValidToken,
-  ensureIsAdmin,
   ensureUserExistsMiddleware,
+  ensureValidToken,
+  userNotAdmin,
   ensureRightUser,
   deleteUserController
 );
