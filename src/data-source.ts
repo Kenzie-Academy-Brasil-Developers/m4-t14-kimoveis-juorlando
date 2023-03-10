@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
 import { AppError } from "./errors";
-import { User, Address, Category, RealEstate, Schedules } from "./entities";
+import { User, Address, Category, RealEstate, Schedule } from "./entities";
 
 const dataSourceConfig = (): DataSourceOptions => {
   // const entitiesPath: string = path.join(__dirname, "./entities/**.{ts.js}");
@@ -22,7 +22,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       type: "sqlite",
       database: ":memory:",
       synchronize: true,
-      entities: [User, Address, Schedules, RealEstate, Category],
+      entities: [User, Address, Schedule, RealEstate, Category],
     };
   }
 
@@ -32,11 +32,11 @@ const dataSourceConfig = (): DataSourceOptions => {
     synchronize: false,
     logging: true,
     migrations: [migrationPath],
-    entities: [User, Address, Schedules, RealEstate, Category],
+    entities: [User, Address, Schedule, RealEstate, Category],
     migrationsTableName: "migration_kimoveis",
   };
 };
 
 const AppDataSource = new DataSource(dataSourceConfig());
 
-export default AppDataSource;
+export {AppDataSource}

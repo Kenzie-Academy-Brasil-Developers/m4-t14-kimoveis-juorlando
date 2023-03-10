@@ -11,7 +11,7 @@ import {
 } from "typeorm";
 import Address from "./addresses.entities";
 import Category from "./categories.entities";
-import Schedules from "./schedules.entities";
+import Schedule from "./schedules.entities";
 
 @Entity("real_estate")
 class RealEstate {
@@ -34,15 +34,13 @@ class RealEstate {
   updatedAt: string;
 
   @OneToOne(() => Address, {cascade: true, eager: true})
-  @JoinColumn()
   address: Address;
 
   @ManyToOne(() => Category, { eager: true})
-  @JoinColumn()
   category: Category;
 
-  @OneToMany(() => Schedules, (schedules) => schedules.realEstate)
-  schedules: Schedules[]
+  @OneToMany(() => Schedule, (schedule) => schedule.realEstate)
+  schedules: Schedule[]
 }
 
 export default RealEstate;

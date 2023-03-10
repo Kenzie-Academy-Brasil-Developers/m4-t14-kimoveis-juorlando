@@ -10,7 +10,7 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from "typeorm";
-import Schedules from "./schedules.entities";
+import Schedule from "./schedules.entities";
 
 @Entity("users")
 class User {
@@ -38,8 +38,8 @@ class User {
   @DeleteDateColumn({type: "date"})
   deletedAt: string;
 
-  @OneToMany(() => Schedules, (schedules) => schedules.user)
-  schedules: Schedules[]
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
+  schedules: Schedule[]
 
   @BeforeInsert()
   @BeforeUpdate()

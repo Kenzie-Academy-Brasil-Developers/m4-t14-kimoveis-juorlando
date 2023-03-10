@@ -3,7 +3,7 @@ import RealEstate from "./realEstate.entities";
 import User from "./user.entities";
 
 @Entity("schedules_users_properties")
-class Schedules {
+class Schedule {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -14,12 +14,10 @@ class Schedules {
   hour: string;
 
   @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
-  @JoinColumn()
   realEstate: RealEstate;
 
   @ManyToOne(() => User, (user) => user.schedules)
-  @JoinColumn()
   user: User;
 }
 
-export default Schedules;
+export default Schedule;

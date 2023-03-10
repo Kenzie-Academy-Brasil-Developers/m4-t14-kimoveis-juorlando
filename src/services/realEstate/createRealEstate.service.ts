@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import AppDataSource from "../../data-source";
+import { AppDataSource } from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
 import {
@@ -7,12 +7,10 @@ import {
   iRealEstate,
   iRealEstateReturn,
 } from "../../interfaces/realEstate.interface";
-import { realEstateReturn } from "../../schemas/realEstateSchema";
 
 const createRealEstateService = async (
   estateData: iRealEstate
 ): Promise<RealEstate> => {
-  
   const addressData: iAddress = estateData.address;
 
   const addressRepository: Repository<Address> =

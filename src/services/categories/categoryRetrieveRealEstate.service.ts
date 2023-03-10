@@ -1,8 +1,14 @@
 import { Repository } from "typeorm";
-import AppDataSource from "../../data-source";
+import { AppDataSource } from "../../data-source";
 import { Category, RealEstate } from "../../entities";
-import { iCategoryRealEstateReturn, iCategoryRealEstateReturns } from "../../interfaces/categories.interface";
-import { categoryRealEstateReturn, categoryRealEstateSchema } from "../../schemas/categoriesSchema";
+import {
+  iCategoryRealEstateReturn,
+  iCategoryRealEstateReturns,
+} from "../../interfaces/categories.interface";
+import {
+  categoryRealEstateReturn,
+  categoryRealEstateSchema,
+} from "../../schemas/categoriesSchema";
 
 const categoryRetrieveRealEstateService = async (
   categoryId: number
@@ -15,7 +21,7 @@ const categoryRetrieveRealEstateService = async (
       id: categoryId,
     },
     relations: {
-      realEstate: true
+      realEstate: true,
     },
   });
 

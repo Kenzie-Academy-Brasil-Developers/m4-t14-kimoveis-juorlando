@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { compare } from "bcryptjs";
-import AppDataSource from "../../data-source";
+import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
 import { iLoginRequest } from "../../interfaces/login.intefaces";
@@ -38,7 +38,7 @@ const createLoginService = async (
     }
   );
 
-  return token
+  return token;
 };
 
 export default createLoginService;
