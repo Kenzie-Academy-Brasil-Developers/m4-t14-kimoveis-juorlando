@@ -17,7 +17,7 @@ const userNotAdmin = async (
   });
 
   if (userAuth.admin.toString() !== "true" && getAdmin!.admin.toString() === "true") {
-    throw new AppError("Insufficient Permission", 403);
+    throw new AppError("Insufficient permission", 403);
   }
 
   return next();

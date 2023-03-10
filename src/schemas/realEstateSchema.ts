@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { categoriesReturn } from "./categoriesSchema";
 
 const createAddressSchema = z.object({
-  street: z.string(),
-  zipCode: z.string().max(8),
+  street: z.string().min(1).max(8),
+  zipCode: z.string().min(1).max(8),
   number: z.string().min(1).max(7).nullish(),
-  city: z.string(),
+  city: z.string().min(1),
   state: z.string().max(2),
 });
 const AddressReturn = createAddressSchema.extend({
@@ -33,6 +34,15 @@ const realEstateReturn = createRealEstateSchema.extend({
   updatedAt: z.string(),
 });
 
+const realEstateReturn2 = createRealEstateSchemaPost.extend({
+  id: z.number(),
+  categoryId: z.number().nullish(),
+  sold: z.boolean().default(false),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  category: z.object({id: z.number(), name: z.string()})
+}).omit({sold: true})
+
 const realEstateArray = realEstateReturn.array();
 
 export {
@@ -41,5 +51,6 @@ export {
   realEstateReturn,
   realEstateArray,
   AddressReturn,
+  realEstateReturn2,
   createRealEstateSchemaPost
 };

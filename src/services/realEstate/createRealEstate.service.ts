@@ -5,12 +5,13 @@ import { AppError } from "../../errors";
 import {
   iAddress,
   iRealEstate,
-  iRealEstateReturn,
+  iRealEstatePost,
 } from "../../interfaces/realEstate.interface";
+import { realEstateReturn2 } from "../../schemas/realEstateSchema";
 
 const createRealEstateService = async (
   estateData: iRealEstate
-) => {
+): Promise<RealEstate> => {
   const addressData: iAddress = estateData.address;
 
   const addressRepository: Repository<Address> =
@@ -36,11 +37,13 @@ const createRealEstateService = async (
 
   const realEstate = estateRepository.create({
     ...estateData,
-    address: newAddress!,
-    category: newCategory!,
+    address: newAddress,
+    category: newCategory,
   });
 
   await estateRepository.save(realEstate);
+
+  // const newRealEstate = realEstateReturn2.parse(realEstate)
 
   return realEstate;
 };

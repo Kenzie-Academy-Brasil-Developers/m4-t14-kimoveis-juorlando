@@ -9,8 +9,11 @@ const retrieveSchedulesService = async (estateId: number) => {
 
   const listSchedules = await estateRepository
     .createQueryBuilder("real_estate")
-    .select(["real_estate.id", "listSchedules"])
+    .select(["real_estate", "listSchedules", "user", "categories", "addresses"])
+    .innerJoin("real_estate.category", "categories")
+    .innerJoin("real_estate.address", "addresses")
     .innerJoin("real_estate.schedules", "listSchedules")
+    .innerJoin("listSchedules.user", "user")
     .innerJoin("listSchedules.realEstate", "estates")
     .where("real_estate.id = :id", { id: estateId })
     .getOne();
