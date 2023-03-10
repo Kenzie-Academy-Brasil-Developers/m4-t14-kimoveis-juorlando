@@ -18,7 +18,7 @@ const ensureAddress = async (
   });
 
   if (findAddressNumber) {
-    throw new AppError("Address already exists");
+    throw new AppError("Address already exists", 409);
   }
 
   return next();

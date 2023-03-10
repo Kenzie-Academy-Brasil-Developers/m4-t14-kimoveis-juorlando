@@ -40,6 +40,7 @@ userRoutes.delete(
   ensureValidToken,
   ensureIsAdmin,
   ensureUserExistsMiddleware,
+  ensureRightUser,
   deleteUserController
 );
 

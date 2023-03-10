@@ -24,7 +24,7 @@ const retrieveCategoryController = async (
 ): Promise<Response> => {
   const getCategory: iCategoryReturns = await retrieveCategoryService();
 
-  return response.status(201).json(getCategory);
+  return response.status(200).json(getCategory);
 };
 
 const categoryRetrieveRealEstateController = async (
@@ -35,7 +35,7 @@ const categoryRetrieveRealEstateController = async (
 
   const categoryEstate = await categoryRetrieveRealEstateService(categoryId);
 
-  return response.status(201).json(categoryEstate);
+  return response.status(200).json(categoryEstate);
 };
 
 export {

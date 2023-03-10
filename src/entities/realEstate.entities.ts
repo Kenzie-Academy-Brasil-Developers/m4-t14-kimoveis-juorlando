@@ -34,9 +34,11 @@ class RealEstate {
   updatedAt: string;
 
   @OneToOne(() => Address, {cascade: true, eager: true})
+  @JoinColumn()
   address: Address;
 
   @ManyToOne(() => Category, { eager: true})
+  @JoinColumn()
   category: Category;
 
   @OneToMany(() => Schedule, (schedule) => schedule.realEstate)

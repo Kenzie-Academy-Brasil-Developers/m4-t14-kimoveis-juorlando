@@ -10,7 +10,7 @@ import {
 
 const createRealEstateService = async (
   estateData: iRealEstate
-): Promise<RealEstate> => {
+) => {
   const addressData: iAddress = estateData.address;
 
   const addressRepository: Repository<Address> =

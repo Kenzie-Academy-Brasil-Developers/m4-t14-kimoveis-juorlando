@@ -17,7 +17,7 @@ const createUserController = async (
 
   const newUser = await createUserService(userData);
 
-  return response.status(201).json(newUser);
+  return response.status(200).json(newUser);
 };
 
 const retrieveUserController = async (

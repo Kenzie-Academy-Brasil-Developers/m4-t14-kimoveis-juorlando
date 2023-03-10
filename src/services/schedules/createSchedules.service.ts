@@ -17,11 +17,11 @@ const createSchedulesService = async (
   const formatedDay = parseDate.getDay();
 
   if (formatedHour > 18 || formatedHour < 8) {
-    throw new AppError("Invalid hour: only hours between 8:00 am and 18:00 pm");
+    throw new AppError("Invalid hour, available times are 8AM to 18PM");
   }
 
   if (formatedDay === 6 || formatedDay === 0) {
-    throw new AppError("Invalid day: Only workdays are markable");
+    throw new AppError("Invalid date, work days are monday to friday");
   }
 
   const checkUser = await schedulesRepository
@@ -37,7 +37,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (checkUser) {
-    throw new AppError("Date already in use");
+    throw new AppError("User schedule to this real estate at this date and time already exists");
   }
 
   const checkEstate = await schedulesRepository
@@ -53,7 +53,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (checkEstate) {
-    throw new AppError("Estate already in use");
+    throw new AppError("Schedule to this real estate at this date and time already exists");
   }
 
   const estateRepository: Repository<RealEstate> =
@@ -64,7 +64,7 @@ const createSchedulesService = async (
   });
 
   if (!newEstate) {
-    throw new AppError("Estate not found");
+    throw new AppError("RealEstate not found");
   }
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);

@@ -21,7 +21,7 @@ const createRealEstateController = async (
 const retrieveRealEstateController = async (request: Request, response: Response) => {
   const getRealEstate: iRealEstateReturns = await retrieveRealEstateService();
 
-  return response.status(201).json(getRealEstate);
+  return response.status(200).json(getRealEstate);
 };
 
 export {

@@ -17,14 +17,23 @@ const createLoginService = async (
   });
 
   if (!user) {
-    throw new AppError("Wrong email or password", 401);
+    throw new AppError("Invalid credentials", 401);
   }
 
   const passwordMatch = await compare(loginData.password, user.password);
 
   if (!passwordMatch) {
-    throw new AppError("Wrong email or password", 401);
+    throw new AppError("Invalid credentials", 401);
   }
+
+  const inativeUsers = await userRepository.findOne({
+    withDeleted: true,
+  });
+
+  if(inativeUsers){
+    throw new AppError("Invalid credentials", 401);
+  }
+
 
   const token = jwt.sign(
     {

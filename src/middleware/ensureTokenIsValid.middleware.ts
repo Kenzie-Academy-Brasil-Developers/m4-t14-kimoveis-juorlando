@@ -11,7 +11,7 @@ const ensureValidToken = async (
   let token = request.headers.authorization;
 
   if (!token) {
-    throw new AppError("Missing Bearer Token", 403);
+    throw new AppError("Missing bearer token", 401);
   }
 
   token = token.split(" ")[1];
