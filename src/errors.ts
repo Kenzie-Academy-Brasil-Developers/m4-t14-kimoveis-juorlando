@@ -11,7 +11,7 @@ class AppError extends Error {
 }
 
 const handleErrors = (
-  err: any,
+  err: Error,
   request: Request,
   response: Response,
   _: NextFunction
