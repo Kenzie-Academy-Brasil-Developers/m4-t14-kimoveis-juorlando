@@ -24,7 +24,7 @@ const handleErrors = (
 
   if (err instanceof ZodError) {
     console.log(err);
-    return response.status(400).json(err.flatten().fieldErrors);
+    return response.status(400).json({message: err.flatten().fieldErrors});
   }
   console.log(err);
   return response.status(500).json({
