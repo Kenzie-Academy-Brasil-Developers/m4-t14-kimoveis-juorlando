@@ -29,7 +29,7 @@ const retrieveUserController = async (
   return response.status(200).json(getUser);
 };
 
-const updateUserController = async (request: Request, response: Response) => {
+const updateUserController = async (request: Request, response: Response): Promise<Response | void> => {
   const userData: iUserUpdate = request.body;
   const userId: number = parseInt(request.params.id);
 
@@ -38,7 +38,7 @@ const updateUserController = async (request: Request, response: Response) => {
   response.status(200).json(newData);
 };
 
-const deleteUserController = async (request: Request, response: Response) => {
+const deleteUserController = async (request: Request, response: Response): Promise<Response | void> => {
   const userId: number = parseInt(request.params.id);
 
   await deleteUserService(userId);

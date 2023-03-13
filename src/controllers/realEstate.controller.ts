@@ -10,7 +10,7 @@ import retrieveRealEstateService from "../services/realEstate/retrieveRealEstate
 const createRealEstateController = async (
   request: Request,
   response: Response
-) => {
+): Promise<Response> => {
   const estateData: iRealEstate = request.body;
 
   const newEstate = await createRealEstateService(estateData);
@@ -18,7 +18,7 @@ const createRealEstateController = async (
   return response.status(201).json(newEstate);
 };
 
-const retrieveRealEstateController = async (request: Request, response: Response) => {
+const retrieveRealEstateController = async (request: Request, response: Response): Promise<Response> => {
   const getRealEstate: iRealEstateReturns = await retrieveRealEstateService();
 
   return response.status(200).json(getRealEstate);

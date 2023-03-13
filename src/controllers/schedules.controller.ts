@@ -18,7 +18,7 @@ const createSchedulesController = async (
 const retrieveSchedulesController = async (
   request: Request,
   response: Response
-) => {
+): Promise<Response> => {
   const estateId = parseInt(request.params.id);
 
   const listDate = await retrieveSchedulesService(estateId);
